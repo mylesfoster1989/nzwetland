@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 import django_heroku
 
@@ -48,6 +49,12 @@ INSTALLED_APPS = [
     'knox',
     'loginapp'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
+
+REST_KNOX = {'TOKEN_TTL': timedelta(minutes=60)}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
